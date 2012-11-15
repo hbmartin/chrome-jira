@@ -1,0 +1,101 @@
+<!doctype html>
+<html><head><title>Jira Issues [Options]</title>
+<script type="text/javascript" src="options.js"></script>
+<script type="text/javascript" src="common.js"></script>
+<style type="text/css">
+body {
+  background-color: #DCDCDC;
+  font-family: Helvetica Neue, Helvetica, Arial, FreeSans, sans-serif;
+  color: #326CA6;
+}
+#content {
+  background-color: #FDFDFD;
+  padding: 10px 20px;
+  margin: 0 auto;
+  width: 50%;
+  -webkit-border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.6), inset 0px 0px 1px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  border-left:   1px solid rgba(0, 0, 0, 0.4);
+  border-right:  1px solid rgba(0, 0, 0, 0.35);
+  border-top:    1px solid rgba(128, 128, 128, 0.1);
+}
+label {
+  display: block;
+  padding-left: 15px;
+  padding-bottom: 5px;
+  font-weight: bold;
+  width: 90%;
+}
+input {
+  padding: 0;
+  margin:0 6px;
+  vertical-align: bottom;
+  position: relative;
+  top: -3px;
+  *overflow: hidden;
+}
+input[type="text"] {
+  top: -1px;
+  width: 30px;
+  padding-left: 3px;
+}
+.icon {
+  margin-right: 3px;
+}
+.hr {
+  border-bottom: 1px solid #D0D0D0;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+.col {
+  display: inline-block;
+  width: 45%;
+  vertical-align: top;
+}
+.sep { margin: 25px 0 10px 0; }
+h2 {margin-top: 5px;}
+.footer {
+  width: 100%;
+  margin: 20px;
+}
+.footer a {
+  position: relative;
+  color: rgb(82, 168, 236);
+  left: 25%;
+  text-decoration: none;
+}
+.footer a img { vertical-align: middle; margin-right: 5px;}
+#motd {
+  padding: 5px;
+  border: 1px dotted;
+  font-size: 1.2em;
+}
+#jira_url { width: 70%; }
+</style>
+</head>
+<body>
+<div id="content">
+  <div class="col left">
+    <h2>Jira Server URL</h2>
+    <form id='jira-form'><label>
+      <input type='input' id='jira_url' /></label>
+    </form>
+    <img src='/img/options_hr.png' class='sep' />
+    <h2>Extra info line</h2>
+    <form id='subbar-form'><label><input type='checkbox' id='subbar' />Show status icons, last updated, contact</label></form>
+    <img src='/img/options_hr.png' class='sep' />
+  <h2>Red Alerts</h2>
+  <form id="alert-form"></form>
+  <img src='/img/options_hr.png' class='sep' />
+  <h2>Status</h2>
+  <form id="opts-form">
+  </form>
+  </div>
+  <div class="col right">
+    <h2>Releases</h2>
+    <form id="versions-form"></form>
+  </div>
+</div>
+<div class='footer'><a href='mailto:harold.martin@openx.com'><img src="/icon-48.png">harold.martin@openx.com</a></div>
+</body></html>

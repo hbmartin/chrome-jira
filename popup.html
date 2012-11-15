@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head>
+  <script type="text/javascript" src="common.js"></script>
+  <script type="text/javascript" src="popup.js"></script>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/popup.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="content container" id="content"></div>
+<div class="modal" id="comment">
+  <div class="modal-header">
+    <button class="close">&times;</button>
+    <h3 id="modal-title">Comment</h3>
+  </div>
+  <div class="modal-body">
+    <div id="comment-text" class="edit comment_box" contenteditable></div>
+    <div id='prev_comments'></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-small btn-primary" id="post_comment">Post Comment</button>
+  </div>
+</div>
+</body></html>
