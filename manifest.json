@@ -1,7 +1,7 @@
 {
-  "name": "Fast JIRA Issues",
-  "version": "2.7",
-  "description": "Inspect JIRA issues in a clear, simple popup.",
+  "name": "Fast JIRA",
+  "version": "2.9.4",
+  "description": "See your JIRA issues in a simple popup.",
   "omnibox": { "keyword" : "jira" },
   "options_page": "options.html",
   "background": { "scripts": ["common.js", "background.js"] },
@@ -12,5 +12,6 @@
   },
   "permissions": [ "tabs", "*://*/*" ],
   "icons" : { "128" : "icon-128.png", "48" : "icon-48.png", "16" : "icon-16.png" },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "manifest_version": 2
 }

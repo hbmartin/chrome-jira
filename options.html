@@ -61,7 +61,7 @@ h2 {margin-top: 5px;}
 }
 .footer a {
   position: relative;
-  color: rgb(82, 168, 236);
+  color: #326CA6;
   left: 25%;
   text-decoration: none;
 }
@@ -82,8 +82,29 @@ h2 {margin-top: 5px;}
       <input type='input' id='jira_url' /></label>
     </form>
     <img src='/img/options_hr.png' class='sep' />
-    <h2>Extra info line</h2>
-    <form id='subbar-form'><label><input type='checkbox' id='subbar' />Show status icons, last updated, contact</label></form>
+    <h2>New + Search Bar</h2>
+    <form id='search_bar-form'><label>
+       <select id='search_bar'>
+        <option value="top">Top</option>
+        <option value="bot">Bottom</option>
+        <option value="none">Off</option>
+      </select></label>
+      </form>
+    <img src='/img/options_hr.png' class='sep' />
+    <h2>Extra Info Line</h2>
+    <form id='subbar-form'><label><input type='checkbox' id='subbar' />Show status icons and...</label>
+      <div style="padding-left: 33px;"><label>Status Time:<br />
+       <select id='rel_time'>
+        <option value="relative">Relative ("3 days ago")</option>
+        <option value="absolute">Absolute ("2/4/2013 3:00:46 PM")</option>
+      </select></label>
+      <label id='display-contact'>Contact:<br />
+       <select id="person">
+        <option value="assignee">Assignee</option>
+        <option value="customfield_10020" id="customfield_10020">QA Assignee</option>
+        <option value="reporter">Reporter</option>
+      </select></label></div>
+    </form>
     <img src='/img/options_hr.png' class='sep' />
   <h2>Red Alerts</h2>
   <form id="alert-form"></form>

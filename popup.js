@@ -1,8 +1,8 @@
 var issue="";
 
 function closeModal() {
-  document.getElementById('comment').hidden=true;
-  document.getElementById('content').hidden=false;
+  document.getElementById('comment').style.visibility="hidden";
+  document.getElementById('content').style.display="block";
   document.body.style.height="";
 }
 function sendComment() {
@@ -75,8 +75,8 @@ function btnAction(e) {
       document.getElementById('comment-text').innerHTML = ("[~" + e.target.getAttribute('data-person') + "]");
     }
     document.getElementById('modal-title').innerHTML = issue + " " + (document.getElementById(issue).getElementsByClassName("summary")[0].innerText);
-    document.getElementById('comment').hidden = false;
-    document.getElementById('content').hidden=true;
+    document.getElementById('comment').style.visibility="visible";
+    document.getElementById('content').style.display="none";
     document.getElementById('comment-text').setAttribute("data-issue", issue);
     document.body.style.height="520px";
     document.getElementById('comment-text').focus();
@@ -134,7 +134,17 @@ function btnAction(e) {
 }
 
 function loadIssues() {
+  if (!localStorage['first_run']){
+    localStorage['first_run'] = true;
+    window.open(chrome.extension.getURL("options.html"));
+    this.window.close()
+    return;
+  }
+  
   document.getElementById("content").innerHTML = localStorage.getItem('html_cache');
+  if (document.getElementById('navbar').className.indexOf("navbar-fixed-top") > -1) {
+    document.getElementById("content").style.marginTop = document.getElementById('navbar').offsetHeight + "px";
+  }
 
   // Attach event handlers to all buttons
   tags = document.getElementsByTagName('form');
@@ -147,6 +157,7 @@ function loadIssues() {
   for (var i = 0; i < closes.length; i++) {
     closes[i].addEventListener('click', closeModal);
   }
+  document.getElementById('search-form').addEventListener('submit', function(e){window.open(jira_url + "/secure/QuickSearch.jspa?searchString=" + document.getElementById('search-input').value);return false;});
 
   // Load and display notes
   issues = document.getElementsByClassName('issue-container');
@@ -160,7 +171,6 @@ function loadIssues() {
     }
   }
 
-  document.getElementById('comment').hidden=true;
   document.getElementById("post_comment").addEventListener('click', sendComment);
 }
 window.onload = loadIssues;
@@ -184,5 +194,7 @@ addEventListener("unload", function (event) {
     _notes=issues[i];
     localStorage.setItem(i + ".notes", JSON.stringify(_notes));
   }
-  chrome.extension.getBackgroundPage().updateJira();
+
+  chrome.extension.sendMessage("updateJira");
+
 }, true);

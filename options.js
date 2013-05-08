@@ -1,4 +1,10 @@
 function saveOpts(e) {
+  setTimeout(function() {
+    saveOpts_async(e);
+  }, 20);
+}
+
+function saveOpts_async(e) {
   var statuses = "";
   var priors   = "";
   var versions_query = "";
@@ -28,10 +34,12 @@ function saveOpts(e) {
       if (opts[i].checked) {
         localStorage.setItem("subbar", 1);
         document.getElementById('person').disabled = false;
+        document.getElementById('rel_time').disabled = false;
       }
       else {
         localStorage.setItem("subbar", 0);
         document.getElementById('person').disabled = true;
+        document.getElementById('rel_time').disabled = true;
       }
     }
     else {
@@ -57,11 +65,14 @@ function saveOpts(e) {
   else { localStorage.removeItem('versions_query'); }
 
   localStorage['priors'] = priors;
+  localStorage.setItem('search_bar', document.getElementById('search_bar').value);
   localStorage.setItem('person', document.getElementById('person').value);
-  chrome.extension.getBackgroundPage().updateJira();
+  localStorage.setItem('rel_time', (document.getElementById('rel_time').value == 'absolute' ? 0 : 1));
+  chrome.extension.sendMessage("updateJira");
 }
 
 function loadOpts() {
+  if (jira_url.indexOf('openx.org') == -1) { var dc = document.getElementById('customfield_10020'); dc.parentNode.removeChild(dc); }
   var _jira_url = document.getElementById('jira_url');
   _jira_url.value = jira_url;
   _jira_url.addEventListener('keyup', function(e){
@@ -148,8 +159,16 @@ function loadOpts() {
   else { document.getElementById('subbar').checked = true; }
   document.getElementById('subbar').onclick = saveOpts;
   
+  if (localStorage.getItem('rel_time')) {
+    document.getElementById('rel_time').value = (localStorage.getItem('rel_time') == 0 ? 'absolute' : 'relative');
+  }
+  document.getElementById('rel_time').onchange = saveOpts;
+
   if (localStorage.getItem('person')) { document.getElementById('person').value = localStorage.getItem('person'); }
   document.getElementById('person').onchange = saveOpts;
+
+  if (localStorage.getItem('search_bar')) { document.getElementById('search_bar').value = localStorage.getItem('search_bar'); }
+  document.getElementById('search_bar').onchange = saveOpts;
 
   if (!(localStorage['been_run'] == 1)) {
     var msg = document.createElement("h2");
