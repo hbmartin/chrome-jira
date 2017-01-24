@@ -1,6 +1,6 @@
 {
   "name": "Fast JIRA",
-  "version": "2.9.4",
+  "version": "2.9.6",
   "description": "See your JIRA issues in a simple popup.",
   "omnibox": { "keyword" : "jira" },
   "options_page": "options.html",

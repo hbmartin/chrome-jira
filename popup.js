@@ -142,7 +142,7 @@ function loadIssues() {
   }
   
   document.getElementById("content").innerHTML = localStorage.getItem('html_cache');
-  if (document.getElementById('navbar').className.indexOf("navbar-fixed-top") > -1) {
+  if (document.getElementById('navbar') && document.getElementById('navbar').className.indexOf("navbar-fixed-top") > -1) {
     document.getElementById("content").style.marginTop = document.getElementById('navbar').offsetHeight + "px";
   }
 
@@ -161,7 +161,8 @@ function loadIssues() {
 
   // Load and display notes
   issues = document.getElementsByClassName('issue-container');
-  for (var i = 0; i < issues.length; i++) {
+  var issues_length = issues.length ? issues.length : 0;
+  for (var i = 0; i < issues_length; i++) {
     issue = issues[i];
     _form = issue.getElementsByClassName('note-form')[0];
     if (( notesStorage = JSON.parse(localStorage.getItem(issue.id + '.notes')) )) {

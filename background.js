@@ -1,10 +1,5 @@
 var timer = 2;  // minutes
 
-// upgrade ox url
-if (localStorage['jira_url'] == "http://jira.pasadena.openx.org") {
-  localStorage['jira_url'] = "https://jira.pasadena.openx.org";
-}
-
 function safe_tags(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 function updateJira() {
@@ -123,7 +118,7 @@ xhr_myip.onreadystatechange = function() {
           totTabs = winTabs.length;
           for (j=0; j<totTabs; j++) {
             t = winTabs[j].url;
-            if (t.indexOf('jira') > -1 ) {
+            if (t.indexOf('jira') > -1 && t.indexOf('chrome.google.com') == -1 ) {
               match = url_re.exec(t);
               // gets http(s)://domain
               localStorage['jira_url'] = match[3];

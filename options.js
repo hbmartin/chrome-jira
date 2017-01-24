@@ -4,6 +4,13 @@ function saveOpts(e) {
   }, 20);
 }
 
+function stripTrailingSlash(str) {
+    if(str.substr(-1) == '/') {
+        return str.substr(0, str.length - 1);
+    }
+    return str;
+}
+
 function saveOpts_async(e) {
   var statuses = "";
   var priors   = "";
@@ -72,11 +79,16 @@ function saveOpts_async(e) {
 }
 
 function loadOpts() {
-  if (jira_url.indexOf('openx.org') == -1) { var dc = document.getElementById('customfield_10020'); dc.parentNode.removeChild(dc); }
-  var _jira_url = document.getElementById('jira_url');
-  _jira_url.value = jira_url;
-  _jira_url.addEventListener('keyup', function(e){
-    localStorage['jira_url'] = jira_url = this.value;
+  var jira_url = localStorage['jira_url'];
+  if (jira_url && jira_url.indexOf('openx.org') == -1) { var dc = document.getElementById('customfield_10020'); dc.parentNode.removeChild(dc); }
+  var $jira_url = document.getElementById('jira_url');
+  $jira_url.value = jira_url;
+  $jira_url.addEventListener('keyup', function(e){
+    if (localStorage['jira_url'] != this.value) {
+      localStorage['jira_url'] = jira_url = stripTrailingSlash(this.value);
+      // TODO: show reload button
+    } 
+    
     if(e.which == 13) { location.reload(); }
   });
   var xhr_status = new XMLHttpRequest();
